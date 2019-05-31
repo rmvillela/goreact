@@ -1,30 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 import { render } from 'react-dom';
 
-class Button extends React.Component {
-  static defaultProps = {
-    children: "Salvar"
-  };
-  
-  static propTypes = {
-    onClick: PropTypes.func.isRequired,
-    children: PropTypes.string
+import Button from './Button';
+
+class App extends React.Component {
+  state = {
+    counter: 0
   };
 
+  /** 
+   * Esta função diferencia-se da debaixo pois nesse caso o THIS refere-se a própria função,
+  já no estilo arrow 
+  
+    handleClick() {
+      this.state.counter += 1;
+    }
+  */ 
+  
+  handleClick = () => {
+    this.setState({ counter: this.state.counter + 1 });
+  }
 
   render() {
     return (
-      <a href="#" onClick={this.props.onClick}>
-        {this.props.children}
-      </a>
-    )
-  }
-}
-
-class App extends React.Component {
-  render() {
-    return <Button onClick={() => { alert("button 1"); }}/>;
+      <Fragment>
+        <h1>Hello Rocketseat</h1>
+        <h1>{this.state.counter}</h1>
+        <Button onClick={this.handleClick}>Somar</Button>
+      </Fragment>
+    );
   }
 }
 
